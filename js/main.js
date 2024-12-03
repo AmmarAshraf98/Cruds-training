@@ -44,11 +44,9 @@ function addProduct() {
     name: productName.value,
     price: productPrice.value,
     category: productCategory.value,
-    image: productImage.value,
-    img2: productImage.files[0].name,
+    img2: productImage.files[0]?.name || "default.jpg",
     desc: productDesc.value,
     id: Math.trunc(Math.random() * 10000),
-    id2: allProduct.length + 1,
   };
 
   // save product in array
@@ -126,7 +124,7 @@ function setFormToUpdate(index, id) {
 
   for (let i = 0; i < allProduct.length; i++) {
     if (allProduct[i].id === id) {
-      selectedIndex = i; //10
+      selectedIndex = i; //
     }
   }
 
@@ -153,7 +151,10 @@ function update() {
       ? productImage.files[0].name
       : allProduct[selectedIndex].img2,
     desc: productDesc.value,
+    id: allProduct[selectedIndex].id,
   };
+
+  console.log(product);
 
   // delete => add new product
   allProduct.splice(selectedIndex, 1, product);
